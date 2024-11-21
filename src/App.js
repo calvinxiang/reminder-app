@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import AddReminder from './components/AddReminder';
+import ViewReminders from './components/ViewReminders';
+import { subscribeUser } from './subscribe';
 
 function App() {
+  useEffect(() => {
+    subscribeUser();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold mb-6 text-center">Reminder App</h1>
+        <AddReminder />
+        <ViewReminders />
+      </div>
     </div>
   );
 }
