@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+# Reminder App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple Reminder App built with a **React.js** frontend, a **FastAPI** backend, and **PostgreSQL** as the database. The app also uses **Redis** for task scheduling and **push notifications** to remind you of important events.
 
-## Available Scripts
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Running the Application](#running-the-application)
+  - [Backend Setup](#backend-setup)
+  - [Frontend Setup](#frontend-setup)
+- [Environment Variables](#environment-variables)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-In the project directory, you can run:
+## Features
+- Create reminders with titles and specific dates/times.
+- View all created reminders.
+- Receive push notifications to be reminded of events.
 
-### `npm start`
+## Tech Stack
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: FastAPI (Python)
+- **Database**: PostgreSQL
+- **Task Scheduling**: Redis
+- **Push Notifications**: Service Worker API, Web Push
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
+### Prerequisites
+- **Node.js** (v14 or above)
+- **Python** (v3.8 or above)
+- **PostgreSQL** (v12 or above)
+- **Redis**
+- **Git**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Installation
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/calvinxiang/reminder-app.git
+   cd reminder-app
+   ```
 
-### `npm test`
+## Running the Application
+### Backend Setup
+1. **Create a virtual environment** and activate it:
+   ```bash
+   python -m venv venv
+   # Activate the virtual environment
+   # On Windows
+   venv\Scripts\activate
+   # On macOS/Linux
+   source venv/bin/activate
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies**:
+   ```bash
+   pip install -r backend/requirements.txt
+   ```
 
-### `npm run build`
+3. **Set up the PostgreSQL database**:
+   - Create a new database named `reminder_app`.
+   - Update the database credentials in the `.env` file.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Start the Redis server**:
+   ```bash
+   # On Ubuntu (Linux)
+   sudo service redis-server start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. **Run the backend**:
+   ```bash
+   cd backend
+   uvicorn main:app --reload
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Frontend Setup
+1. **Navigate to the frontend folder**:
+   ```bash
+   cd ../frontend
+   ```
 
-### `npm run eject`
+2. **Install frontend dependencies**:
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Start the frontend**:
+   ```bash
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Environment Variables
+You need to set up environment variables for both the frontend and backend.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Backend `.env` (in `backend/` folder):
+```
+VAPID_PUBLIC_KEY=<YOUR_PUBLIC_VAPID_KEY>
+VAPID_PRIVATE_KEY=<YOUR_PRIVATE_VAPID_KEY>
+DATABASE_URL=postgresql://<username>:<password>@localhost/reminder_app
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Frontend `.env` (in `frontend/` folder):
+```
+REACT_APP_VAPID_PUBLIC_KEY=<YOUR_PUBLIC_VAPID_KEY>
+```
 
-## Learn More
+Ensure that these `.env` files are **not pushed** to GitHub, as they contain sensitive information.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
+- After starting both the frontend and backend servers, open your browser and navigate to `http://localhost:3000`.
+- Use the form to create reminders and receive notifications.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-### Code Splitting
+## License
+This project is open-source and available under the [MIT License](LICENSE).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
